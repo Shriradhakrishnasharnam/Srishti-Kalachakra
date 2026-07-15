@@ -12,23 +12,25 @@ import streamlit as st
 import requests
 import pandas as pd
 from datetime import date
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 st.set_page_config(page_title="Space Explorer - Srishti Kalachakra", layout="centered")
 
 st.title("Space Explorer")
 st.caption("Live data from NASA and open space APIs")
 
-# NASA's free API works with a demo key out of the box, but the demo key is
-# rate-limited (30 requests/hour, 50/day) since it is shared by everyone.
-# For regular use, get your own free key at https://api.nasa.gov and paste
-# it in the box below (it is not saved anywhere, only used for this session).
+default_key = os.getenv("NASA_API_KEY", "DEMO_KEY")
+
 with st.sidebar:
     st.subheader("NASA API Key")
     st.write(
-        "Using the shared demo key by default. For heavier use, get a free "
-        "personal key at api.nasa.gov and paste it here."
+        "Loaded automatically from your .env file. You can override it here "
+        "for this session only, without changing any files."
     )
-    api_key = st.text_input("API key", value="DEMO_KEY")
+    api_key = st.text_input("API key", value=default_key)
 
 st.divider()
 
