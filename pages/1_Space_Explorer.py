@@ -22,19 +22,27 @@ st.set_page_config(page_title="Space Explorer - Srishti Kalachakra", layout="cen
 st.title("Space Explorer")
 st.caption("Live data from NASA and open space APIs")
 
-default_key = os.getenv("NASA_API_KEY", "DEMO_KEY")
+env_key = os.getenv("NASA_API_KEY")
 
 with st.sidebar:
     st.subheader("NASA API Key")
-    st.write(
-        "Loaded automatically from your .env file. You can override it here "
-        "for this session only, without changing any files."
+
+    if env_key:
+        st.success("Using your personal API key (loaded securely from .env).")
+    else:
+        st.info("Using the shared NASA demo key (rate-limited). Add a key to your .env file for higher limits.")
+
+    override_key = st.text_input(
+        "Override key for this session (optional)",
+        value="",
+        type="password",
+        help="Leave blank to use the key from your .env file. Anything typed here is masked and never saved.",
     )
-    api_key = st.text_input("API key", value=default_key)
+
+    api_key = override_key if override_key else (env_key or "DEMO_KEY")
 
 st.divider()
 
-# --- Section 1: Astronomy Picture of the Day ---
 st.header("Astronomy Picture of the Day")
 
 if st.button("Load Today's Picture"):
@@ -62,7 +70,6 @@ if st.button("Load Today's Picture"):
 
 st.divider()
 
-# --- Section 2: Live ISS Location ---
 st.header("Where is the ISS Right Now")
 
 if st.button("Track ISS"):
@@ -86,7 +93,6 @@ if st.button("Track ISS"):
 
 st.divider()
 
-# --- Section 3: Near-Earth Asteroids Today ---
 st.header("Near-Earth Asteroids Approaching Today")
 
 if st.button("Check Asteroids"):
