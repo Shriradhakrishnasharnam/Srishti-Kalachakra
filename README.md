@@ -1,6 +1,5 @@
 # Srishti Kalachakra
 ### (Srishti Kalachakra — Creation, Wheel of Time - The Cosmos Explorer)
-
 **An interactive cosmology toolkit — calculators, simulations, and visualizations for exploring the universe, right in your browser.**
 
 Srishti Kalachakra is a from-scratch web application for exploring the fundamentals of cosmology: from calculating cosmological distances and redshifts, to simulating the expansion of the universe, to visualizing the cosmic microwave background and large-scale structure. It's built to be both a hands-on learning tool and a reference-grade scientific calculator — named for creation (*srishti*) and the ever-turning wheel of cosmic time (*kalachakra*).
@@ -37,39 +36,27 @@ Srishti Kalachakra is a from-scratch web application for exploring the fundament
 
 | Layer | Technology |
 |---|---|
-| Frontend | React (Vite) + Tailwind CSS |
-| Visualization | D3.js / Recharts (2D plots), Three.js (3D scenes) |
-| Backend | Node.js + Express (heavier numerical computation, e.g. Friedmann equation integration) |
-| Numerical core | JavaScript-native integration (e.g. `mathjs`) for solving cosmological ODEs |
-| Deployment | GitHub Codespaces for development; static frontend + lightweight API backend |
+| Application | Python + Streamlit (turns a Python script into an interactive web app — no separate frontend framework needed) |
+| Cosmology calculations | `astropy.cosmology` — purpose-built library with standard cosmological models (Planck18, WMAP9, etc.) and functions for distances, ages, and Hubble parameter |
+| Numerical computing | `NumPy`, `SciPy` |
+| Visualization | `Plotly` (interactive 2D charts), `Matplotlib` (static plots) |
+| Deployment | GitHub Codespaces for development; Streamlit Community Cloud or a simple server for hosting |
 
 ---
 
 ## Getting Started
 
-This project is developed entirely inside **GitHub Codespaces** — no local setup required.
-
-1. **Open in Codespaces**
-   - Click `Code → Codespaces → Create codespace on main`
+1. **Open**
+   - Click `Code -> Codespaces -> Create codespace on main`
 
 2. **Install dependencies**
    ```bash
-   # Frontend
-   cd client
-   npm install
-
-   # Backend
-   cd ../server
-   npm install
+   pip install -r requirements.txt
    ```
 
-3. **Run the development servers**
+3. **Run the app**
    ```bash
-   # Backend (from /server)
-   npm run dev
-
-   # Frontend (from /client)
-   npm run dev
+   streamlit run app.py
    ```
 
 4. Open the forwarded port shown in the Codespaces "Ports" tab to view the app.
@@ -80,17 +67,12 @@ This project is developed entirely inside **GitHub Codespaces** — no local set
 
 ```
 srishti-kalachakra/
-├── client/                 # React frontend (Vite)
-│   ├── src/
-│   │   ├── components/     # Calculators, simulations, visualizations
-│   │   ├── pages/
-│   │   ├── utils/          # Cosmology math helpers
-│   │   └── data/           # Cosmological parameter presets
-│   └── ...
-├── server/                 # Express backend
-│   ├── routes/             # API endpoints for heavier computations
-│   ├── controllers/
-│   └── utils/              # Numerical integration, ODE solvers
+├── app.py                  # Main Streamlit application (entry point)
+├── requirements.txt        # Python dependencies
+├── cosmology/               # Cosmology calculation modules
+│   ├── distances.py         # Redshift, distance, age calculations
+│   └── models.py             # Cosmological model presets
+├── pages/                   # Additional Streamlit pages (calculators, sims, timeline)
 └── README.md
 ```
 
@@ -124,4 +106,4 @@ This source code is proprietary and confidential. Unauthorized copying, modifica
 
 ---
 
-*Srishti Kalachakra — building with curiosity about the universe, one equation at a time.* 
+*Srishti Kalachakra — building with curiosity about the universe, one equation at a time.*
