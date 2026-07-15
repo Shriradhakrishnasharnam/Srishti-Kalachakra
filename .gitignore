@@ -1,0 +1,14 @@
+# Environment variables (contains real secrets - never commit this)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
