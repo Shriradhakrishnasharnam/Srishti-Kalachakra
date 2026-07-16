@@ -28,7 +28,7 @@ with st.sidebar:
     st.subheader("NASA API Key")
 
     if env_key:
-        st.success("Using your personal API key (loaded securely from .env).")
+        st.success("Jai Shri Radha Krishna!")
     else:
         st.info("Using the shared NASA demo key (rate-limited). Add a key to your .env file for higher limits.")
 
