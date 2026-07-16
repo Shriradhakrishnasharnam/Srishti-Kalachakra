@@ -45,7 +45,7 @@ st.divider()
 
 st.header("Astronomy Picture of the Day")
 
-if st.button("Load Today's Picture"):
+with st.spinner("Loading today's picture..."):
     try:
         response = requests.get(
             "https://api.nasa.gov/planetary/apod",
@@ -58,7 +58,7 @@ if st.button("Load Today's Picture"):
         st.subheader(data.get("title", "Untitled"))
 
         if data.get("media_type") == "image":
-            st.image(data["url"], use_container_width=True)
+            st.image(data["url"], use_column_width=True)
         elif data.get("media_type") == "video":
             st.video(data["url"])
 
@@ -72,7 +72,7 @@ st.divider()
 
 st.header("Where is the ISS Right Now")
 
-if st.button("Track ISS"):
+with st.spinner("Locating the ISS..."):
     try:
         response = requests.get("http://api.open-notify.org/iss-now.json", timeout=10)
         response.raise_for_status()
@@ -91,11 +91,13 @@ if st.button("Track ISS"):
     except requests.exceptions.RequestException as e:
         st.error(f"Could not fetch ISS location. Details: {e}")
 
+st.button("Refresh ISS Location")
+
 st.divider()
 
 st.header("Near-Earth Asteroids Approaching Today")
 
-if st.button("Check Asteroids"):
+with st.spinner("Checking for nearby asteroids..."):
     try:
         today = date.today().isoformat()
         response = requests.get(
